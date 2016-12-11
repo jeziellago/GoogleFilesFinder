@@ -68,7 +68,7 @@ try:
 					f.write(log[n])
 				f.close()
 				print("\nFile " + path_file + " saved!\n\n")
-		do_wget = raw_input("\n>> Do you want download (with wget) the files? [Y/n]?")
+		do_wget = raw_input("\n>> Do you want download (with wget) the files? [Y/n] ")
 		if do_wget == '' or do_wget == 'Y' or do_wget == 'y':
 			dir_save = raw_input("\n>> Enter dir for save the files: ")
 			if dir_save != "":
