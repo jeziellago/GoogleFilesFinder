@@ -21,11 +21,11 @@ class search_linkedin:
         try:
             urly="http://"+ self.server + "/search?num=100&start=" + str(self.counter) + "&hl=en&meta=&q=site%3Alinkedin.com/in%20" + self.word
         except Exception, e:
-            print e
+            print(e)
         try:
             r=requests.get(urly)
         except Exception,e:
-            print e
+            print(e)
         self.results = r.content
         self.totalresults += self.results
 
@@ -37,4 +37,4 @@ class search_linkedin:
         while (self.counter < self.limit):
             self.do_search()
             self.counter += 100
-            print "\tSearching " + str(self.counter) + " results.."
+            print("\tSearching " + str(self.counter) + " results..")

@@ -28,7 +28,7 @@ class search_yandex:
         returncode, returnmsg, headers = h.getreply()
         self.results = h.getfile().read()
         self.totalresults += self.results
-        print self.results
+        print(self.results)
 
     def do_search_files(self, files):  # TODO
         h = httplib.HTTP(self.server)
@@ -46,7 +46,7 @@ class search_yandex:
         nextres = renext.findall(self.results)
         if nextres != []:
             nexty = "1"
-            print str(self.counter)
+            print(str(self.counter))
         else:
             nexty = "0"
         return nexty
@@ -67,7 +67,7 @@ class search_yandex:
         while self.counter <= self.limit:
             self.do_search()
             self.counter += 50
-            print "Searching " + str(self.counter) + " results..."
+            print("Searching " + str(self.counter) + " results...")
 
     def process_files(self, files):
         while self.counter < self.limit:

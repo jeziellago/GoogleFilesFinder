@@ -16,7 +16,7 @@ class dns_reverse():
             DNS.ParseResolvConf("/etc/resolv.conf")
             nameserver = DNS.defaults['server'][0]
         except:
-            print "Error in DNS resolvers"
+            print("Error in DNS resolvers")
             sys.exit()
 
     def run(self, host):
@@ -40,7 +40,7 @@ class dns_reverse():
         try:
             list = IPy.IP(ips)
         except:
-            print "Error in IP format, check the input and try again. (Eg. 192.168.1.0/24)"
+            print("Error in IP format, check the input and try again. (Eg. 192.168.1.0/24)")
             sys.exit()
         name = []
         for x in list:
@@ -70,7 +70,7 @@ class dns_force():
         try:
             f = open(self.file, "r")
         except:
-            print "Error opening dns dictionary file"
+            print("Error opening dns dictionary file")
             sys.exit()
         self.list = f.readlines()
 
@@ -95,10 +95,10 @@ class dns_force():
                     server=primary,
                     aa=1).req()
             except Exception as e:
-                print e
+                print(e)
 
             if test.header['status'] != "NOERROR":
-                print "Error"
+                print("Error")
                 sys.exit()
             self.nameserver = test.answers[0]['data']
         elif self.nameserver == "local":
@@ -108,7 +108,7 @@ class dns_force():
     def run(self, host):
         if self.nameserver == "":
             self.nameserver = self.getdns(self.domain)
-            print "Using DNS server: " + self.nameserver
+            print("Using DNS server: " + self.nameserver)
 
         hostname = str(host.split("\n")[0]) + "." + str(self.domain)
         if self.verbose:
@@ -186,7 +186,7 @@ class dns_tld():
                 0]['data']
             test = DNS.Request(rootdom, qtype='NS', server=primary, aa=1).req()
             if test.header['status'] != "NOERROR":
-                print "Error"
+                print("Error")
                 sys.exit()
             self.nameserver = test.answers[0]['data']
         elif self.nameserver == "local":
