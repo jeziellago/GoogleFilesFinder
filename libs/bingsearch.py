@@ -74,7 +74,7 @@ class search_bing:
     def process(self, api):
         if api == "yes":
             if self.bingApi == "":
-                print "Please insert your API key in the discovery/bingsearch.py"
+                print("Please insert your API key in the discovery/bingsearch.py")
                 sys.exit()
         while (self.counter < self.limit):
             if api == "yes":
@@ -84,7 +84,7 @@ class search_bing:
                 self.do_search()
                 time.sleep(1)
             self.counter += 50
-            print "\tSearching " + str(self.counter) + " results..."
+            print("\tSearching " + str(self.counter) + " results...")
 
     def process_vhost(self):
         # Maybe it is good to use other limit for this.
