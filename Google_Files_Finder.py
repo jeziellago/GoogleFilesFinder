@@ -44,17 +44,17 @@ try:
 	print('\nListing files URLs:\n')
 		
 	p = 0
-	
+	position = 1
 	while p < len(all_files):
 		url = all_files[p]
 		url = cut_string(url,'&')
 			
 		if url[1:4] == 'url':
 			url = url[7:len(url)]
-			print('----------> ' + url)
-			log.append("\n" + url)
-		p = p + 1
-
+			print('-------> ['+str(position)+"]   " + url)
+			log.append(url)
+			position += 1
+		p += 1
 
 	print('\n')
 	
@@ -65,20 +65,27 @@ try:
 			if path_file != '':
 				f = open(path_file,'w')
 				for n in range(0,len(log)):
-					f.write(log[n])
+					f.write("\n" + str("[" + int(n+1) + "]") +" "+ log[n])
 				f.close()
 				print("\nFile " + path_file + " saved!\n\n")
-		do_wget = raw_input("\n>> Do you want download (with wget) the files? [Y/n] ")
+		do_wget = raw_input("\n>> Do you want download (with wget) all files? [Y/n] ")
 		if do_wget == '' or do_wget == 'Y' or do_wget == 'y':
 			dir_save = raw_input("\n>> Enter dir for save the files: ")
 			if dir_save != "":
 				for n in range(1,len(log)):
 					os.system("wget " + log[n] + " -P " + dir_save)
+		else:
+			do_wget = raw_input("\n>> Do you want download (with wget) any file? [Y/n] ")
+			if do_wget == '' or do_wget == 'Y' or do_wget == 'y':
+				url_position = input("\n>> Enter the url position for download or 0 for exit (Ex.: 1,2,3...): ")
+				while(int(url_position) > 0):
+					dir_save = raw_input("\n>> Enter dir for save the file: ")
+					if dir_save != "":
+						os.system("wget " + log[int(url_position)] + " -P " + dir_save)
+					url_position = raw_input("\n>> Enter the url position for download or 0 for exit (Ex.: 1,2,3...): ")
 			
-		
-				
 	except:
-		print("\nError in saving file " + path_file)
+		print("\nError in file saving process")
 	
 	print("\n\nAction finished!\n")
 	
