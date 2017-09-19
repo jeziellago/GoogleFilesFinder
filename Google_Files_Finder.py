@@ -4,7 +4,7 @@
 # Powered by Jeziel Lago [jeziellago@gmail.com]
 
 import os
-from libs import *
+import googlesearch
 
 try:
 	os.system("clear")
@@ -28,13 +28,13 @@ try:
 	print('/                                               by Jeziel Lago /')
 	print('================================================================')
 	
-	search = raw_input("\n-> Enter a key word: ")
+	search = input("\n-> Enter a key word: ")
 	log = []
 	log.append("Key Word of File Search -> " + search + "\n\n")
 	
 	search = search.replace(" ","+")
-	file_type = raw_input("-> Enter the file type (Ex.: pdf, txt, docx): ")
-	amount_results = input("-> Enter the max amount of results (Max = 1000000): ")
+	file_type = input("-> Enter the file type (Ex.: pdf, txt, docx): ")
+	amount_results = int(input("-> Enter the max amount of results (Max = 1000000): "))
 	print('\n\n[-] Searching files in google...')
 	search = googlesearch.search_google(search, amount_results, 1, file_type) 
 	search.process()
@@ -59,30 +59,30 @@ try:
 	print('\n')
 	
 	try:
-		save_results = raw_input("\n\n>> Do you want to save the results to a file? [Y/n] ")
+		save_results = input("\n\n>> Do you want to save the results to a file? [Y/n] ")
 		if save_results == '' or save_results == 'Y' or save_results == 'y':
-			path_file = raw_input("\n>> Enter the path to save the file: ")
+			path_file = input("\n>> Enter the path to save the file: ")
 			if path_file != '':
 				f = open(path_file,'w')
 				for n in range(0,len(log)):
 					f.write("\n" + str("[" + int(n+1) + "]") +" "+ log[n])
 				f.close()
 				print("\nFile " + path_file + " saved!\n\n")
-		do_wget = raw_input("\n>> Do you want download (with wget) all files? [Y/n] ")
+		do_wget = input("\n>> Do you want download (with wget) all files? [Y/n] ")
 		if do_wget == '' or do_wget == 'Y' or do_wget == 'y':
-			dir_save = raw_input("\n>> Enter dir for save the files: ")
+			dir_save = input("\n>> Enter dir for save the files: ")
 			if dir_save != "":
 				for n in range(1,len(log)):
 					os.system("wget " + log[n] + " -P " + dir_save)
 		else:
-			do_wget = raw_input("\n>> Do you want download (with wget) any file? [Y/n] ")
+			do_wget = input("\n>> Do you want download (with wget) any file? [Y/n] ")
 			if do_wget == '' or do_wget == 'Y' or do_wget == 'y':
 				url_position = input("\n>> Enter the url position for download or 0 for exit (Ex.: 1,2,3...): ")
 				while(int(url_position) > 0):
-					dir_save = raw_input("\n>> Enter dir for save the file: ")
+					dir_save = input("\n>> Enter dir for save the file: ")
 					if dir_save != "":
 						os.system("wget " + log[int(url_position)] + " -P " + dir_save)
-					url_position = raw_input("\n>> Enter the url position for download or 0 for exit (Ex.: 1,2,3...): ")
+					url_position = input("\n>> Enter the url position for download or 0 for exit (Ex.: 1,2,3...): ")
 			
 	except:
 		print("\nError in file saving process")

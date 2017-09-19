@@ -1,10 +1,9 @@
 import string
 import sys
-import myparser
 import re
 import time
 import requests
-
+import myparser
 
 class search_google:
 
@@ -24,26 +23,26 @@ class search_google:
         try:
             #urly="http://" + self.server + "/search?num=" + self.quantity + "&start=" + str(self.counter) + "&hl=pt&meta=&q=%40\"" + self.word + "\""
 			#urly="http://google.com.br/search?hl=pt&q=" + self.word + "&as_filetype=pdf"
-			urly="https://www.google.com.br/search?hl=pt&q=sql" + self.word + "&as_filetype=" + self.filetype + "&gws_rd=ssl"
-        except Exception, e:
-            print(e)
+            urly="https://www.google.com.br/search?hl=pt&q=sql" + self.word + "&as_filetype=" + self.filetype + "&gws_rd=ssl"
+        except:
+            print('Error...\n')
         try:
             r=requests.get(urly)
-        except Exception,e:
-            print(e)
-        self.results = r.content 
+        except:
+            print('Error...\n')
+        self.results = str(r.content)
         self.totalresults += self.results
 
 
     def do_search_profiles(self):
         try:
             urly="http://" + self.server + "/search?num=" + self.quantity + "&start=" + str(self.counter) + "&hl=en&meta=&q=site:www.google.com%20intitle:\"Google%20Profile\"%20\"Companies%20I%27ve%20worked%20for\"%20\"at%20" + self.word + "\""
-        except Exception, e:
-            print(e)
+        except:
+            print('Error...\n')
         try:
             r=requests.get(urly)
-        except Exception,e:
-            print(e)
+        except:
+            print('Error...\n')
         self.results = r.content 
 
         #'&hl=en&meta=&q=site:www.google.com%20intitle:"Google%20Profile"%20"Companies%20I%27ve%20worked%20for"%20"at%20' + self.word + '"')
